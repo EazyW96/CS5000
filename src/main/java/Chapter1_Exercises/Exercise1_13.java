@@ -26,7 +26,7 @@ package Chapter1_Exercises;
  */
 public class Exercise1_13 {
     public static void main(String[] args) {
-                // Coefficients of the equations
+               // Coefficients of the equations
         double a = 3.4, b = 50.2, c = 2.1, d = 0.55, e = 44.5, f = 5.9;
 
         // Calculate the determinant (ad - bc)
@@ -38,13 +38,12 @@ public class Exercise1_13 {
             double x = (e * d - b * f) / determinant;
             double y = (a * f - e * c) / determinant;
 
-            // Display the results
-            System.out.println("Solution:");
-            System.out.println("x = " + x);
-            System.out.println("y = " + y);
+          // Display the results with two decimal places
+            System.out.printf("Solution:%n");
+            System.out.printf("x = %.2f%n", x);
+            System.out.printf("y = %.2f%n", y);
         } else {
             System.out.println("The system of equations has no solution.");
         }
-        
     }
 }
