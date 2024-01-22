@@ -8,7 +8,7 @@
                           45.5 - 3.5           .*/
 package Chapter1_Exercises;
 
-public class Exercise1_5 {
+public class Exercise5 {
 
     public static void main(String[] args) {
         System.out.println("9.5 X 4.5 - 2.5 X 3");

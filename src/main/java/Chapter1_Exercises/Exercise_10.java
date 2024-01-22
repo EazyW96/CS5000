@@ -9,7 +9,7 @@
 
 package Chapter1_Exercises;
 
-public class Exercise1_10 {
+public class Exercise_10 {
     public static void main(String[] args) {
         // Distance in kilometers
         double distanceInKilometers = 14.0;

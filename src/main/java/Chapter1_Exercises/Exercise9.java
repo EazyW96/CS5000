@@ -14,7 +14,7 @@ package Chapter1_Exercises;
  *
  * @author ciaon
  */
-public class Exercise1_9 {
+public class Exercise9 {
     public static void main(String[] args) {
         
         // Given width and height

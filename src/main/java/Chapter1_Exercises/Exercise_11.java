@@ -25,7 +25,7 @@ package Chapter1_Exercises;
  *
  * @author ciaon
  */
-public class Exercise1_11 {
+public class Exercise_11 {
     public static void main(String[] args) {
         // Current population
         long currentPopulation = 312032486;

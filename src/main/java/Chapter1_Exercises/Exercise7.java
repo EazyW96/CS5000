@@ -19,7 +19,7 @@ package Chapter1_Exercises;
  *
  * @author ciaon
  */
-public class Exercise1_7 {
+public class Exercise7 {
 
     public static void main(String[] args) {
 

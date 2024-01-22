@@ -15,7 +15,7 @@ package Chapter1_Exercises;
  *
  * @author ciaon
  */
-public class Exercise1_8 {
+public class Exercise8 {
     public static void main(String[] args) {
         
         // Given radius

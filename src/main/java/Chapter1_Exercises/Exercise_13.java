@@ -24,7 +24,7 @@ package Chapter1_Exercises;
  *
  * @author ciaon
  */
-public class Exercise1_13 {
+public class Exercise_13 {
     public static void main(String[] args) {
                // Coefficients of the equations
         double a = 3.4, b = 50.2, c = 2.1, d = 0.55, e = 44.5, f = 5.9;
