@@ -20,7 +20,7 @@ import java.util.Scanner;
  *
  * @author ciaon
  */
-public class Exercise2_1 {
+public class Exercise1 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         

@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author ciaon
  */
-public class Exercise2_3 {
+public class Exercise3 {
 
     public static void main(String[] args) {
         // Constant for the conversion factor

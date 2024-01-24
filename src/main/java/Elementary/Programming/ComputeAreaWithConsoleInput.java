@@ -14,10 +14,15 @@ public class ComputeAreaWithConsoleInput {
         double radius = input.nextDouble();
         
         // Compute area
-        double area = radius * radius * 3.14159;
-        
+       // double area = radius * radius * 3.14159;
+        if (radius < 0){                                // selection statement 
+            System.out.println("Incorrect input");
+        }else{
+            double area = radius * radius * 3.14159;
+            System.out.println("Area is " + area);
+        }
         // Display results
-        System.out.println("The area for the circle of radius " +
-                radius + " is " + area);
+       // System.out.println("The area for the circle of radius " +
+            //    radius + " is " + area);
     }
 }
