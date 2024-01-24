@@ -1,3 +1,2 @@
-This repository is me doing the exercise programs that are at the end of each chapter.
-
-Also the examples that are used thorughout reading the chapter's.
+This repository contains my implementation of the exercise programs located at the conclusion of each chapter.
+It also includes the examples referenced throughout the reading of the chapters.
