@@ -74,7 +74,7 @@ public class LibraryManager {
     private void addBook() {
         try {
             if (bookCount >= MAX_BOOKS) {
-                throw new RuntimeException("Cannot add more books. Library is full.");
+                throw new RuntimeException("\nCannot add more books. Library is full.\n");
             }
 
             System.out.println("\nEnter book details");
@@ -88,27 +88,27 @@ public class LibraryManager {
 
             // Check if the ISBN already exists
             if (isISBNExists(ISBN)) {
-                throw new RuntimeException("Book with this ISBN already exists in the library.");
+                throw new RuntimeException("\nBook with this ISBN already exists in the library.\n");
             }
 
-            System.out.print("Has title (string): e.g. Java Programming\t\t  ");
+            System.out.print("Has title (string): e.g. Java Programming\t\t\t  ");
             String title = scanner.nextLine();
-            System.out.print("Has a Type (string): e.g. textbook, magazine, journal etc  ");
+            System.out.print("Has a Type (string): e.g. textbook, magazine, journal etc\t  ");
             String type = scanner.nextLine();
-            System.out.print("Has a Publisher (string): e.g., TAMUC ");
+            System.out.print("Has a Publisher (string): e.g., TAMUC\t\t\t\t  ");
             String publisher = scanner.nextLine();
-            System.out.print("Has Page information (how many pages) (integer): e.g., 506 ");
+            System.out.print("Has Page information (how many pages) (integer): e.g., 506\t  ");
             int pages = scanner.nextInt();
-            System.out.print("Has Price (float): e.g., 20.00 ");
+            System.out.print("Has Price (float): e.g., 20.00\t\t\t\t\t  ");
             float price = scanner.nextFloat();
-            System.out.print("Has Publication Year (integer): e.g., 2013 ");
+            System.out.print("Has Publication Year (integer): e.g., 2013\t\t\t  ");
             int publicationYear = scanner.nextInt();
 
             // Create a new Book object and add it to the array
             book[bookCount++] = new Book(ISBN, title, type, publisher, pages, price, publicationYear);
-            System.out.println("Book added successfully.");
+            System.out.println("\nBook added successfully.\n");
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input format. Please enter a valid input.");
+            System.out.println("\nInvalid input format. Please enter a valid input.\n");
             scanner.nextLine(); // Clear the input buffer
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
@@ -130,12 +130,12 @@ public class LibraryManager {
             return;
         }
 
-        System.out.print("Enter ISBN of the book to remove: ");
+        System.out.print("Enter ISBN of the book to remove:\t\t ");
         String ISBN = scanner.nextLine();
 
         int index = findBookIndex(ISBN);
         if (index == -1) {
-            System.out.println("Book with ISBN " + ISBN + " not found.");
+            System.out.println("\nBook with ISBN " + ISBN + " not found.\n");
             return;
         }
 
@@ -145,7 +145,7 @@ public class LibraryManager {
         }
         bookCount--;
 
-        System.out.println("Book removed successfully.");
+        System.out.println("\nBook removed successfully.\n");
     }
 
     private int findBookIndex(String ISBN) {
@@ -164,25 +164,25 @@ public class LibraryManager {
         }
 
         try {
-            System.out.print("Enter ISBN of the book to check out: ");
+            System.out.print("Enter ISBN of the book to check out:\t\t ");
             String ISBN = scanner.nextLine();
 
             int index = findBookIndex(ISBN);
             if (index == -1) {
-                System.out.println("Book with ISBN " + ISBN + " not found.");
+                System.out.println("\nBook with ISBN " + ISBN + " not found.\n");
                 return;
             }
 
             if (book[index].getStatus() == 1) {
-                System.out.println("Book is already checked out.");
+                System.out.println("\nBook is already checked out.\n");
                 return;
             }
 
-            System.out.print("Enter name of the person checking out: ");
+            System.out.print("Enter name of the person checking out:\t\t ");
             String checkedOutBy = scanner.nextLine();
 
             Date dueDate = new Date(); // Create a new Date object
-            System.out.print("Enter due date (Year Month Day): ");
+            System.out.print("Enter due date (Year Month Day):\t\t ");
             dueDate.nYear = scanner.nextInt();
             dueDate.nMonth = scanner.nextInt();
             dueDate.nDay = scanner.nextInt();
@@ -191,7 +191,7 @@ public class LibraryManager {
             book[index].setCheckedOutBy(checkedOutBy);
             book[index].setDueDate(dueDate);
 
-            System.out.println("Book checked out successfully.");
+            System.out.println("\nBook checked out successfully.\n");
         } catch (InputMismatchException e) {
             System.out.println("Invalid input format for due date. Please enter a valid input.");
             scanner.nextLine(); // Clear the input buffer
@@ -200,21 +200,21 @@ public class LibraryManager {
 
     private void checkinBook() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
+            System.out.println("\nError: No books have been checked out yet.\n" + "Please select choice 1(add new book)\n");
             return;
         }
 
-        System.out.print("Enter ISBN of the book to check in: ");
+        System.out.print("Enter ISBN of the book to check in:\t\t ");
         String ISBN = scanner.nextLine();
 
         int index = findBookIndex(ISBN);
         if (index == -1) {
-            System.out.println("Book with ISBN " + ISBN + " not found.");
+            System.out.println("\nBook with ISBN " + ISBN + " not found.\n");
             return;
         }
 
         if (book[index].getStatus() == 0) {
-            System.out.println("Book is already checked in.");
+            System.out.println("\nBook is already checked in.\n");
             return;
         }
 
@@ -222,7 +222,7 @@ public class LibraryManager {
         book[index].setCheckedOutBy("");
         book[index].setDueDate(null);
 
-        System.out.println("Book checked in successfully.");
+        System.out.println("\nBook checked in successfully.\n");
     }
 
     private void displayAllBooks() {
