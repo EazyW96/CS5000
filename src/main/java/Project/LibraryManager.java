@@ -126,7 +126,7 @@ public class LibraryManager {
 
     private void removeBook() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
             return;
         }
 
@@ -159,7 +159,7 @@ public class LibraryManager {
 
     private void checkoutBook() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
             return;
         }
 
@@ -200,7 +200,7 @@ public class LibraryManager {
 
     private void checkinBook() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
             return;
         }
 
@@ -227,7 +227,7 @@ public class LibraryManager {
 
     private void displayAllBooks() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
             return;
         }
 
@@ -255,7 +255,7 @@ public class LibraryManager {
 
     private void displayAvailableBooks() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
             return;
         }
 
@@ -280,7 +280,7 @@ public class LibraryManager {
 
     private void displayCheckedOutBooks() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
             return;
         }
 
