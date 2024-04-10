@@ -83,7 +83,7 @@ public class LibraryManager {
 
             // Check if the ISBN has exactly 10 digits
             if (ISBN.length() != 10) {
-                throw new RuntimeException("ISBN must have exactly 10 digits.");
+                throw new RuntimeException("\nISBN must have exactly 10 digits.\n");
             }
 
             // Check if the ISBN already exists
