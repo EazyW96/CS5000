@@ -1,21 +1,23 @@
 package Project;
 
-/**
- *
- * @author ciaon
- */
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Date {
-    int nYear;
-    int nMonth;
-    int nDay;
+    int year;
+    int month;
+    int day;
+
+    public Date(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
 }
 
 public class LibraryManager {
     private static final int MAX_BOOKS = 100;
-    private Book[] book = new Book[MAX_BOOKS];
+    private Book[] books = new Book[MAX_BOOKS];
     private int bookCount = 0;
     private Scanner scanner = new Scanner(System.in);
 
@@ -83,7 +85,7 @@ public class LibraryManager {
 
             // Check if the ISBN has exactly 10 digits
             if (ISBN.length() != 10) {
-                throw new RuntimeException("\nISBN must have exactly 10 digits.\n");
+                throw new IllegalArgumentException("\nISBN must have exactly 10 digits.\n");
             }
 
             // Check if the ISBN already exists
@@ -105,11 +107,13 @@ public class LibraryManager {
             int publicationYear = scanner.nextInt();
 
             // Create a new Book object and add it to the array
-            book[bookCount++] = new Book(ISBN, title, type, publisher, pages, price, publicationYear);
+            books[bookCount++] = new Book(ISBN, title, type, publisher, pages, price, publicationYear);
             System.out.println("\nBook added successfully.\n");
         } catch (InputMismatchException e) {
             System.out.println("\nInvalid input format. Please enter a valid input.\n");
             scanner.nextLine(); // Clear the input buffer
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
@@ -117,7 +121,7 @@ public class LibraryManager {
 
     private boolean isISBNExists(String ISBN) {
         for (int i = 0; i < bookCount; i++) {
-            if (book[i].getISBN().equals(ISBN)) {
+            if (books[i].getISBN().equals(ISBN)) {
                 return true;
             }
         }
@@ -126,11 +130,11 @@ public class LibraryManager {
 
     private void removeBook() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1 (add new book)\n");
             return;
         }
 
-        System.out.print("Enter ISBN of the book to remove:\t\t ");
+        System.out.print("Enter ISBN of the book to remove:\t\t\t\t   ");
         String ISBN = scanner.nextLine();
 
         int index = findBookIndex(ISBN);
@@ -141,7 +145,7 @@ public class LibraryManager {
 
         // Shift elements to fill the gap
         for (int i = index; i < bookCount - 1; i++) {
-            book[i] = book[i + 1];
+            books[i] = books[i + 1];
         }
         bookCount--;
 
@@ -150,7 +154,7 @@ public class LibraryManager {
 
     private int findBookIndex(String ISBN) {
         for (int i = 0; i < bookCount; i++) {
-            if (book[i].getISBN().equals(ISBN)) {
+            if (books[i].getISBN().equals(ISBN)) {
                 return i;
             }
         }
@@ -159,12 +163,12 @@ public class LibraryManager {
 
     private void checkoutBook() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1 (add new book)\n");
             return;
         }
 
         try {
-            System.out.print("Enter ISBN of the book to check out:\t\t ");
+            System.out.print("Enter ISBN of the book to check out:\t\t\t\t   ");
             String ISBN = scanner.nextLine();
 
             int index = findBookIndex(ISBN);
@@ -173,38 +177,40 @@ public class LibraryManager {
                 return;
             }
 
-            if (book[index].getStatus() == 1) {
+            if (books[index].getStatus() == 1) {
                 System.out.println("\nBook is already checked out.\n");
                 return;
             }
 
-            System.out.print("Enter name of the person checking out:\t\t ");
+            System.out.print("Enter name of the person checking out:\t\t\t\t   ");
             String checkedOutBy = scanner.nextLine();
 
-            Date dueDate = new Date(); // Create a new Date object
-            System.out.print("Enter due date (Year Month Day):\t\t ");
-            dueDate.nYear = scanner.nextInt();
-            dueDate.nMonth = scanner.nextInt();
-            dueDate.nDay = scanner.nextInt();
+            System.out.print("Enter due date (Year Month Day):\t\t\t\t   ");
+            int year = scanner.nextInt();
+            int month = scanner.nextInt();
+            int day = scanner.nextInt();
+            Date dueDate = new Date(year, month, day);
 
-            book[index].setStatus(1); // Set status to checked-out
-            book[index].setCheckedOutBy(checkedOutBy);
-            book[index].setDueDate(dueDate);
+            books[index].setStatus(1); // Set status to checked-out
+            books[index].setCheckedOutBy(checkedOutBy);
+            books[index].setDueDate(dueDate);
 
             System.out.println("\nBook checked out successfully.\n");
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input format for due date. Please enter a valid input.");
+            System.out.println("\nInvalid input format for due date. Please enter a valid input.\n");
             scanner.nextLine(); // Clear the input buffer
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     private void checkinBook() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books have been checked out yet.\n" + "Please select choice 1(add new book)\n");
+            System.out.println("\nError: No books have been checked out yet.\n" + "Please select choice 1 (add new book)\n");
             return;
         }
 
-        System.out.print("Enter ISBN of the book to check in:\t\t ");
+        System.out.print("Enter ISBN of the book to check in:\t\t\t\t   ");
         String ISBN = scanner.nextLine();
 
         int index = findBookIndex(ISBN);
@@ -213,95 +219,91 @@ public class LibraryManager {
             return;
         }
 
-        if (book[index].getStatus() == 0) {
+        if (books[index].getStatus() == 0) {
             System.out.println("\nBook is already checked in.\n");
             return;
         }
 
-        book[index].setStatus(0); // Set status to available
-        book[index].setCheckedOutBy("");
-        book[index].setDueDate(null);
+        books[index].setStatus(0); // Set status to available
+        books[index].setCheckedOutBy("");
+        books[index].setDueDate(null);
 
         System.out.println("\nBook checked in successfully.\n");
     }
 
     private void displayAllBooks() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1 (add new book)\n");
             return;
         }
 
-        try {
-            System.out.println("\nAll Book Details:");
-            for (int i = 0; i < bookCount; i++) {
-                System.out.println("ISBN: " + book[i].getISBN());
-                System.out.println("Title: " + book[i].getTitle());
-                System.out.println("Type: " + book[i].getType());
-                System.out.println("Publisher: " + book[i].getPublisher());
-                System.out.println("Pages: " + book[i].getPages());
-                System.out.println("Price: " + book[i].getPrice());
-                System.out.println("Publication Year: " + book[i].getPublicationYear());
-                System.out.println("Status: " + (book[i].getStatus() == 0 ? "Available" : "Checked-out"));
-                if (book[i].getStatus() == 1) {
-                    System.out.println("Checked Out By: " + book[i].getCheckedOutBy());
-                    System.out.println("Due Date: " + book[i].getDueDate().nYear + "-" + book[i].getDueDate().nMonth + "-" + book[i].getDueDate().nDay);
-                }
-                System.out.println();
+        System.out.println("\nAll Book Details:");
+        for (int i = 0; i < bookCount; i++) {
+            System.out.println("ISBN: " + books[i].getISBN());
+            System.out.println("Title: " + books[i].getTitle());
+            System.out.println("Type: " + books[i].getType());
+            System.out.println("Publisher: " + books[i].getPublisher());
+            System.out.println("Pages: " + books[i].getPages());
+            System.out.println("Price: " + books[i].getPrice());
+            System.out.println("Publication Year: " + books[i].getPublicationYear());
+            System.out.println("Status: " + (books[i].getStatus() == 0 ? "Available" : "Checked-out"));
+            if (books[i].getStatus() == 1) {
+                System.out.println("Checked Out By: " + books[i].getCheckedOutBy());
+                Date dueDate = books[i].getDueDate();
+                System.out.println("Due Date: " + dueDate.year + "-" + dueDate.month + "-" + dueDate.day);
             }
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
+            System.out.println();
         }
     }
 
     private void displayAvailableBooks() {
-        if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
-            return;
+        boolean anyAvailable = false;
+
+        for (int i = 0; i < bookCount; i++) {
+            if (books[i].getStatus() == 0) {
+                anyAvailable = true;
+                System.out.println("ISBN: " + books[i].getISBN());
+                System.out.println("Title: " + books[i].getTitle());
+                System.out.println("Type: " + books[i].getType());
+                System.out.println("Publisher: " + books[i].getPublisher());
+                System.out.println("Pages: " + books[i].getPages());
+                System.out.println("Price: " + books[i].getPrice());
+                System.out.println("Publication Year: " + books[i].getPublicationYear());
+                System.out.println();
+            }
         }
 
-        try {
-            System.out.println("\nAvailable Book Details:");
-            for (int i = 0; i < bookCount; i++) {
-                if (book[i].getStatus() == 0) {
-                    System.out.println("ISBN: " + book[i].getISBN());
-                    System.out.println("Title: " + book[i].getTitle());
-                    System.out.println("Type: " + book[i].getType());
-                    System.out.println("Publisher: " + book[i].getPublisher());
-                    System.out.println("Pages: " + book[i].getPages());
-                    System.out.println("Price: " + book[i].getPrice());
-                    System.out.println("Publication Year: " + book[i].getPublicationYear());
-                    System.out.println();
-                }
-            }
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
+        if (!anyAvailable) {
+            System.out.println("\nError: No books are currently available.\n");
         }
     }
 
     private void displayCheckedOutBooks() {
         if (bookCount == 0) {
-            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1(add new book)\n");
+            System.out.println("\nError: No books entered yet.\n" + "Please select choice 1 (add new book)\n");
             return;
         }
 
-        try {
-            System.out.println("\nChecked-out Book Details:\n");
-            for (int i = 0; i < bookCount; i++) {
-                if (book[i].getStatus() == 1) {
-                    System.out.println("ISBN: " + book[i].getISBN());
-                    System.out.println("Title: " + book[i].getTitle());
-                    System.out.println("Type: " + book[i].getType());
-                    System.out.println("Publisher: " + book[i].getPublisher());
-                    System.out.println("Pages: " + book[i].getPages());
-                    System.out.println("Price: " + book[i].getPrice());
-                    System.out.println("Publication Year: " + book[i].getPublicationYear());
-                    System.out.println("Checked Out By: " + book[i].getCheckedOutBy());
-                    System.out.println("Due Date: " + book[i].getDueDate().nYear + "-" + book[i].getDueDate().nMonth + "-" + book[i].getDueDate().nDay);
-                    System.out.println();
-                }
+        boolean foundCheckedOutBook = false;
+        for (int i = 0; i < bookCount; i++) {
+            if (books[i].getStatus() == 1) {
+                foundCheckedOutBook = true;
+                System.out.println("ISBN: " + books[i].getISBN());
+                System.out.println("Title: " + books[i].getTitle());
+                System.out.println("Type: " + books[i].getType());
+                System.out.println("Publisher: " + books[i].getPublisher());
+                System.out.println("Pages: " + books[i].getPages());
+                System.out.println("Price: " + books[i].getPrice());
+                System.out.println("Publication Year: " + books[i].getPublicationYear());
+                System.out.println("Checked Out By: " + books[i].getCheckedOutBy());
+                Date dueDate = books[i].getDueDate();
+                System.out.println("Due Date: " + dueDate.year + "-" + dueDate.month + "-" + dueDate.day);
+                System.out.println();
             }
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
+        }
+
+        if (!foundCheckedOutBook) {
+            System.out.println("\nNo books are currently checked out.\n");
         }
     }
 }

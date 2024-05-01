@@ -1,9 +1,5 @@
 package Project;
 
-/**
- *
- * @author ciaon
- */
 class Book {
     private String ISBN;
     private String title;
@@ -26,9 +22,10 @@ class Book {
         this.publicationYear = publicationYear;
         this.status = 0; // Set default status to available
         this.checkedOutBy = "";
-        this.dueDate = new Date(); // Default due date
+        this.dueDate = new Date(0, 0, 0); // Default due date
     }
 
+    // Getters and Setters
     public String getISBN() {
         return ISBN;
     }
