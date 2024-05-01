@@ -58,10 +58,8 @@ public class Rectangle extends GeometricObject {
     }
 
     @Override
-    /**
-     * Return perimeter
-     */
-    public double getPerimeter() {
+    /** Return perimeter
+    */public double getPerimeter() {
         return 2 * (width + height);
     }
     

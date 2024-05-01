@@ -2,62 +2,80 @@ package Chapt_13_AbstractClassesAndInterfaces;
 
 /**
  *
- * @author ciaon
- * Abstract Class name is intalicized
+ * @author ciaon Abstract Class name is intalicized
  */
 public abstract class GeometricObject {
-    
+
     private String color = "white";
     private boolean filled;
     private java.util.Date dateCreated;
-    
-    /** Construct a default geometric object */
+
+    /**
+     * Construct a default geometric object
+     */
     protected GeometricObject() {
         dateCreated = new java.util.Date();
     }
-    
-    /** Construct a geometric object with color and filled value */
-    protected GeometricObject (String color, boolean filled) {
+
+    /**
+     * Construct a geometric object with color and filled value
+     */
+    protected GeometricObject(String color, boolean filled) {
         dateCreated = new java.util.Date();
         this.color = color;
         this.filled = filled;
     }
-    
-    /** Return color */
+
+    /**
+     * Return color
+     */
     public String getColor() {
         return color;
     }
-    
-    /** set a new color */
+
+    /**
+     * set a new color
+     */
     public void setColor(String color) {
         this.color = color;
     }
-    
-    /** Return filled, Since filled is boolean, *
-     * the get method is named isFilled */
+
+    /**
+     * Return filled, Since filled is boolean, * the get method is named
+     * isFilled
+     */
     public boolean isFilled() {
         return filled;
     }
-    
-    /** Set a new filled */
+
+    /**
+     * Set a new filled
+     */
     public void setFilled(boolean filled) {
         this.filled = filled;
     }
-    
-    /** Get datedCreated */
+
+    /**
+     * Get datedCreated
+     */
     public java.util.Date getDateCreated() {
         return dateCreated;
     }
-    
+
     @Override
     public String toString() {
-        return "created on " + dateCreated + "\ncolor: " + color +
-                " and filled: " + filled;
+        return "created on " + dateCreated + "\ncolor: " + color
+                + " and filled: " + filled;
     }
-    /** Abstract method getArea */
+
+    /**
+     * Abstract method getArea
+     */
     public abstract double getArea();
-    
-    /** Abstract method getPerimeter */
+
+    /**
+     * Abstract method getPerimeter
+     */
     public abstract double getPerimeter();
-   
+
 }
