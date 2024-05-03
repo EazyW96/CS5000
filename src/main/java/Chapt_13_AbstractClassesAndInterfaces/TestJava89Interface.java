@@ -22,6 +22,7 @@ public class TestJava89Interface implements Java89Interface {
         // Calling static method
         int value = Java89Interface.getAValue();
         System.out.println("Value from static method: " + value);
-        input.close();
+        input.close(); 
+        
     }
 }
